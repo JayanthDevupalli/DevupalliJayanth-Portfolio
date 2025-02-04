@@ -2,7 +2,12 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import Image from "next/image"
+import Image, { StaticImageData } from "next/image"
+import bb1 from '../assets/bb1.png'
+import bb2  from '../assets/bb2.png';
+import bb3 from '../assets/bb3.png';
+import bb4 from '../assets/bb4.jpg';
+import bb5 from '../assets/bb5.jpg';
 
 const projectsData = [
   {
@@ -10,24 +15,30 @@ const projectsData = [
     description:
       "Developed 'Budget Boss', a web application that provides users with a centralized dashboard for tracking financial data, including income, expenses, and transactions. Leveraged modern web technologies to ensure a dynamic, responsive user experience, and secure data management. Empowered users to take control of their finances and achieve financial goals with confidence.",
     technologies: ["React", "Tailwind CSS", "GitHub", "Google Firebase"],
-    images: ["/placeholder.svg?height=300&width=400", "/placeholder.svg?height=300&width=400"],
+    images: [bb1,bb2,bb3,bb4,bb5],
   },
   {
     title: "Project 2",
     description: "This project demonstrates my backend development capabilities.",
     technologies: ["Node.js", "Express", "MongoDB"],
-    images: ["/placeholder.svg?height=300&width=400", "/placeholder.svg?height=300&width=400"],
+    images: [bb2,bb3],
   },
   {
     title: "Project 3",
     description: "This project illustrates my full-stack development skills.",
     technologies: ["Python", "Django", "PostgreSQL"],
-    images: ["/placeholder.svg?height=300&width=400", "/placeholder.svg?height=300&width=400"],
+    images: [bb4,bb5,bb1],
   },
 ]
 
 const Projects = () => {
-  const [selectedProject, setSelectedProject] = useState(null)
+  // const [selectedProject, setSelectedProject] = useState(null)
+  const [selectedProject, setSelectedProject] = useState<{
+    title: string;
+    description: string;
+    technologies: string[];
+    images: string[] | StaticImageData[];
+  } | null>(null);
 
   return (
     <section id="projects" className="py-20 bg-gray-50 relative overflow-hidden">
@@ -52,7 +63,7 @@ const Projects = () => {
               {/* Project Image */}
               <div className="relative w-full h-56">
                 <Image
-                  src={project.images[0] || "/placeholder.svg"}
+                  src={project.images[index]}
                   alt={project.title}
                   fill
                   style={{ objectFit: "cover" }}
@@ -125,7 +136,7 @@ const Projects = () => {
                 {selectedProject.images.map((img, index) => (
                   <div key={index} className="w-60 h-40 relative flex-shrink-0">
                     <Image
-                      src={img || "/placeholder.svg"}
+                      src={img}
                       alt={`Project Image ${index}`}
                       fill
                       style={{ objectFit: "cover" }}
@@ -142,5 +153,4 @@ const Projects = () => {
   )
 }
 
-export default Projects
-
+export default Projects;
