@@ -13,7 +13,7 @@ const projectsData = [
   {
     title: "Budget Boss",
     description:
-      "Developed 'Budget Boss', a web application that provides users with a centralized dashboard for tracking financial data, including income, expenses, and transactions. Leveraged modern web technologies to ensure a dynamic, responsive user experience, and secure data management. Empowered users to take control of their finances and achieve financial goals with confidence.",
+      "Developed **Budget Boss**, a web app for tracking income, expenses, and transactions via a dynamic, responsive dashboard. Ensured secure data management, empowering users to take control of their finances with confidence.",
     technologies: ["React", "Tailwind CSS", "GitHub", "Google Firebase"],
     images: [bb1,bb2,bb3,bb4,bb5],
   },
