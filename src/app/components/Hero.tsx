@@ -125,9 +125,14 @@ const Hero = () => {
   )
 }
 
-const SocialIcon = (props) => {
-  const { href, icon } = props
+import { ReactNode } from "react"; // import ReactNode if you're using TS
 
+interface SocialIconProps {
+  href: string;
+  icon: ReactNode;
+}
+
+const SocialIcon = ({ href, icon }: SocialIconProps) => {
   return (
     <motion.a
       href={href}
@@ -139,7 +144,9 @@ const SocialIcon = (props) => {
     >
       {icon}
     </motion.a>
-  )
-}
+  );
+};
+
+
 
 export default Hero
