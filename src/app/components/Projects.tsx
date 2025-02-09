@@ -8,8 +8,7 @@ import bb1 from "../assets/bb1.png";
 import bb2 from "../assets/bb2.png";
 import bb3 from "../assets/bb3.png";
 import bb4 from "../assets/bb4.jpg";
-import bb5 from "../assets/bb5.jpg";
-
+//import bb5 from "../assets/bb5.jpg";
 
 interface Project {
   title: string;
@@ -28,7 +27,7 @@ const projectsData: Project[] = [
     description:
       "Developed 'Budget Boss', a web app for tracking income, expenses, and transactions via a dynamic, responsive dashboard. Ensured secure data management, empowering users to take control of their finances with confidence.",
     technologies: ["React", "Tailwind CSS", "GitHub", "Google Firebase"],
-    images: [bb1, bb2, bb3, bb4, bb5],
+    images: [bb1, bb2, bb3, bb4],
   },
   {
     title: "Project 2",
@@ -40,7 +39,7 @@ const projectsData: Project[] = [
     title: "Project 3",
     description: "This project illustrates my full-stack development skills.",
     technologies: ["Python", "Django", "PostgreSQL"],
-    images: [bb4, bb5, bb1],
+    images: [bb4, bb1],
   },
 ];
 
@@ -85,7 +84,7 @@ const Projects = () => {
   );
 };
 
-
+// Typing the props for ProjectCard
 interface ProjectCardProps {
   project: Project;
   index: number;
