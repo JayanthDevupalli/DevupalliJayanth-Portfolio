@@ -85,7 +85,7 @@ const Projects = () => {
   );
 };
 
-// Typing the props for ProjectCard
+
 interface ProjectCardProps {
   project: Project;
   index: number;
