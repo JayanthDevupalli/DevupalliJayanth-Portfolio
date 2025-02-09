@@ -3,7 +3,8 @@ import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import Image from "next/image"
 import Jay from "../assets/Jay1.jpg"
-import { Menu, X } from "lucide-react" // Import icons for mobile menu
+import { Menu, X } from "lucide-react"
+import { FaGithub, FaLinkedin, FaInstagram} from "react-icons/fa"
 
 const Hero = () => {
   const [isClient, setIsClient] = useState(false)
@@ -63,7 +64,6 @@ const Hero = () => {
       {/* Main Content */}
       <div className="relative z-10 container mx-auto px-8 lg:px-16">
         <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-16">
-
           {/* Left Content */}
           <motion.div
             initial={{ opacity: 0, x: -100 }}
@@ -76,21 +76,28 @@ const Hero = () => {
             </h1>
             <h2 className="text-2xl lg:text-3xl text-gray-700 mb-6">WEB DEVELOPER</h2>
             <p className="text-lg text-gray-800 mb-8 max-w-lg mx-auto lg:mx-0">
-              Passionate about building beautiful and highly interactive web applications. Skilled in React, Next.js, and modern UI/UX design.
+              Passionate about building beautiful and highly interactive web applications. Skilled in React, Next.js,
+              and modern UI/UX design.
             </p>
-            {isClient && (
-              <motion.a
-                href="./Resume.pdf"  // Replace with the correct file path
-                download="Resume.pdf" // Optional: You can specify the filename for the download
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition duration-300 shadow-lg"
-              >
-                Download Resume
-              </motion.a>
-            )}
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+              {isClient && (
+                <motion.a
+                  href="./Resume.pdf"
+                  download="Resume.pdf"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition duration-300 shadow-lg"
+                >
+                  Download Resume
+                </motion.a>
+              )}
+              <div className="flex gap-4">
+                <SocialIcon href="https://github.com/JayanthDevupalli" icon={<FaGithub />} />
+                <SocialIcon href="https://www.linkedin.com/in/devupalli-jayanth-37b22b257/" icon={<FaLinkedin />} />
+                <SocialIcon href="https://www.instagram.com/jayanth_devupally/" icon={<FaInstagram />} />
+              </div>
+            </div>
           </motion.div>
-
 
           {/* Right Image with Glow */}
           <motion.div
@@ -104,7 +111,7 @@ const Hero = () => {
               <div className="absolute -inset-4 bg-blue-400 opacity-30 rounded-full blur-3xl -z-10"></div>
 
               <Image
-                src={Jay}
+                src={Jay || "/placeholder.svg"}
                 alt="Your Name"
                 width={320}
                 height={320}
@@ -112,10 +119,26 @@ const Hero = () => {
               />
             </div>
           </motion.div>
-
         </div>
       </div>
     </section>
+  )
+}
+
+const SocialIcon = (props) => {
+  const { href, icon } = props
+
+  return (
+    <motion.a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
+      className="bg-white p-3 rounded-full shadow-md text-gray-700 hover:text-blue-600 transition-colors duration-300"
+    >
+      {icon}
+    </motion.a>
   )
 }
 
