@@ -168,7 +168,7 @@ interface TypedTextProps {
   loop?: boolean;
 }
 
-const TypedText = ({ strings, typeSpeed = 30, backSpeed = 30, loop = true }: TypedTextProps) => {
+const TypedText = ({ strings, typeSpeed = 30, backSpeed = 30}: TypedTextProps) => {
   const [currentStringIndex, setCurrentStringIndex] = useState(0)
   const [currentText, setCurrentText] = useState("")
   const [isDeleting, setIsDeleting] = useState(false)

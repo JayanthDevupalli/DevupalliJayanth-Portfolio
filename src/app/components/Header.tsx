@@ -90,7 +90,7 @@ const Header = () => {
 
         {/* Navigation */}
         <ul className="hidden md:flex gap-10 text-gray-200 font-medium">
-          {navItems.map((item, i) => (
+          {navItems.map((item) => (
             <motion.li key={item.href} whileHover={{ scale: 1.1 }} transition={{ type: "spring", stiffness: 300 }}>
               <Link
                 href={item.href}
