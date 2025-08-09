@@ -161,7 +161,14 @@ import { Menu, X } from "lucide-react"
 import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa"
 
 // Custom Typing Animation Component
-const TypedText = ({ strings, typeSpeed = 30, backSpeed = 30, loop = true }) => {
+interface TypedTextProps {
+  strings: string[];
+  typeSpeed?: number;
+  backSpeed?: number;
+  loop?: boolean;
+}
+
+const TypedText = ({ strings, typeSpeed = 30, backSpeed = 30, loop = true }: TypedTextProps) => {
   const [currentStringIndex, setCurrentStringIndex] = useState(0)
   const [currentText, setCurrentText] = useState("")
   const [isDeleting, setIsDeleting] = useState(false)
