@@ -1,4 +1,4 @@
-import Header from "./components/Header"
+// import Header from "./components/Header"
 import Hero from "./components/Hero"
 import Education from "./components/Education"
 import Projects from "./components/Projects"
@@ -9,7 +9,7 @@ import Footer from "./components/Footer"
 export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-100 to-white">
-      <Header />
+      {/* <Header /> */}
       <Hero />
       <Education />
       <Projects />

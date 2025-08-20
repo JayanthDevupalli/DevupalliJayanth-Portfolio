@@ -149,56 +149,271 @@
 
 
 
+// // export default Hero
+// "use client"
+
+// import type React from "react"
+// import img from "../assets/Jay2.jpg";
+// import { useState, useEffect } from "react"
+// import { motion, AnimatePresence } from "framer-motion"
+// import Image from "next/image"
+// import { Menu, X } from "lucide-react"
+// import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa"
+
+// // Custom Typing Animation Component
+// interface TypedTextProps {
+//   strings: string[];
+//   typeSpeed?: number;
+//   backSpeed?: number;
+//   loop?: boolean;
+// }
+
+// const TypedText = ({ strings, typeSpeed = 30, backSpeed = 30}: TypedTextProps) => {
+//   const [currentStringIndex, setCurrentStringIndex] = useState(0)
+//   const [currentText, setCurrentText] = useState("")
+//   const [isDeleting, setIsDeleting] = useState(false)
+
+//   useEffect(() => {
+//     const currentString = strings[currentStringIndex]
+
+//     const timeout = setTimeout(
+//       () => {
+//         if (!isDeleting) {
+//           // Typing
+//           if (currentText.length < currentString.length) {
+//             setCurrentText(currentString.slice(0, currentText.length + 1))
+//           } else {
+//             // Finished typing, start deleting after a pause
+//             setTimeout(() => setIsDeleting(true), 1000)
+//           }
+//         } else {
+//           // Deleting
+//           if (currentText.length > 0) {
+//             setCurrentText(currentText.slice(0, -1))
+//           } else {
+//             // Finished deleting, move to next string
+//             setIsDeleting(false)
+//             setCurrentStringIndex((prev) => (prev + 1) % strings.length)
+//           }
+//         }
+//       },
+//       isDeleting ? backSpeed : typeSpeed,
+//     )
+
+//     return () => clearTimeout(timeout)
+//   }, [currentText, isDeleting, currentStringIndex, strings, typeSpeed, backSpeed])
+
+//   return (
+//     <span>
+//       {currentText}
+//       <span className="animate-pulse">|</span>
+//     </span>
+//   )
+// }
+
+// const Hero = () => {
+//   const [isClient, setIsClient] = useState(false)
+//   const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+//   useEffect(() => {
+//     setIsClient(true)
+//   }, [])
+
+//   return (
+//     <section
+//       id="home"
+//       className="relative min-h-screen flex flex-col justify-between bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#0f172a] text-white overflow-hidden"
+//     >
+//       {/* Animated Gradient Blobs */}
+//       <motion.div
+//         animate={{ x: [0, 50, -50, 0], y: [0, -30, 30, 0] }}
+//         transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY }}
+//         className="absolute top-10 left-10 w-72 h-72 bg-purple-500 rounded-full blur-3xl opacity-30"
+//       />
+//       <motion.div
+//         animate={{ x: [0, -40, 40, 0], y: [0, 40, -40, 0] }}
+//         transition={{ duration: 25, repeat: Number.POSITIVE_INFINITY }}
+//         className="absolute bottom-10 right-10 w-80 h-80 bg-blue-500 rounded-full blur-3xl opacity-30"
+//       />
+
+//       {/* Navbar */}
+//       <nav className="fixed top-0 left-0 w-full bg-white/10 backdrop-blur-lg shadow-lg z-50 py-4">
+//         <div className="container mx-auto flex justify-between items-center px-6 lg:px-16">
+//           <h1 className="text-2xl font-bold tracking-widest text-white">DJ</h1>
+//           <ul className="hidden md:flex gap-8 text-gray-200 font-medium">
+//             {["Home", "Education", "Projects", "Skills", "Contact"].map((item) => (
+//               <li key={item}>
+//                 <a href={`#${item.toLowerCase()}`} className="hover:text-blue-400 transition">
+//                   {item}
+//                 </a>
+//               </li>
+//             ))}
+//           </ul>
+//           <button className="md:hidden text-white" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+//             {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+//           </button>
+//         </div>
+//         {/* Mobile Menu */}
+//         <AnimatePresence>
+//           {isMenuOpen && (
+//             <motion.div
+//               initial={{ opacity: 0, y: -10 }}
+//               animate={{ opacity: 1, y: 0 }}
+//               exit={{ opacity: 0, y: -10 }}
+//               className="absolute top-16 left-0 w-full bg-white/20 backdrop-blur-lg shadow-lg md:hidden"
+//             >
+//               <ul className="flex flex-col items-center gap-4 py-4 text-white">
+//                 {["Home", "Education", "Projects", "Skills", "Contact"].map((item) => (
+//                   <li key={item}>
+//                     <a
+//                       href={`#${item.toLowerCase()}`}
+//                       onClick={() => setIsMenuOpen(false)}
+//                       className="hover:text-blue-400 transition"
+//                     >
+//                       {item}
+//                     </a>
+//                   </li>
+//                 ))}
+//               </ul>
+//             </motion.div>
+//           )}
+//         </AnimatePresence>
+//       </nav>
+
+//       {/* Main Content */}
+//       <div className="container mx-auto flex flex-col-reverse lg:flex-row items-center justify-center gap-16 px-6 lg:px-16 pt-32 lg:pt-40">
+//         {/* Left Content */}
+//         <motion.div
+//           initial={{ opacity: 0, x: -100 }}
+//           animate={{ opacity: 1, x: 0 }}
+//           transition={{ duration: 1 }}
+//           className="flex-1 text-center lg:text-left"
+//         >
+//           <motion.h1
+//             initial={{ y: 50, opacity: 0 }}
+//             animate={{ y: 0, opacity: 1 }}
+//             transition={{ duration: 1, delay: 0.2 }}
+//             className="text-5xl lg:text-7xl font-extrabold mb-4 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent"
+//           >
+//             DEVUPALLI JAYANTH
+//           </motion.h1>
+//           <h2 className="text-2xl lg:text-3xl text-gray-300 mb-4 h-12">
+//             {isClient && (
+//               <TypedText
+//                 strings={["WEB DEVELOPER", "UI/UX DESIGN ENTHUSIAST", "PROBLEM SOLVER"]}
+//                 typeSpeed={50}
+//                 backSpeed={30}
+//                 loop={true}
+//               />
+//             )}
+//           </h2>
+//           <p className="text-lg text-gray-400 mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed">
+//             I create beautiful, responsive, and high-performance web applications using cutting-edge technology.
+//           </p>
+//           <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+//             {isClient && (
+//               <motion.a
+//                 href="./Resume.pdf"
+//                 download="Resume.pdf"
+//                 whileHover={{ scale: 1.05 }}
+//                 whileTap={{ scale: 0.95 }}
+//                 className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition"
+//               >
+//                 Download Resume
+//               </motion.a>
+//             )}
+//             <div className="flex gap-4">
+//               <SocialIcon href="https://github.com/JayanthDevupalli" icon={<FaGithub />} />
+//               <SocialIcon href="https://www.linkedin.com/in/devupalli-jayanth-37b22b257/" icon={<FaLinkedin />} />
+//               <SocialIcon href="https://www.instagram.com/jayanth_devupally/" icon={<FaInstagram />} />
+//             </div>
+//           </div>
+//         </motion.div>
+
+//         {/* Right Image */}
+//         <motion.div
+//           initial={{ opacity: 0, x: 100 }}
+//           animate={{ opacity: 1, x: 0 }}
+//           transition={{ duration: 1 }}
+//           className="flex-1 flex justify-center lg:justify-end relative"
+//         >
+//           <div className="relative group">
+//             <div className="absolute -inset-6 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 blur-3xl opacity-60 group-hover:opacity-80 transition" />
+//             <Image
+//               src={img || "/placeholder.svg"}
+//               alt="Devupalli Jayanth"
+//               width={340}
+//               height={340}
+//               className="rounded-full shadow-2xl border-4 border-white/20"
+//             />
+//           </div>
+//         </motion.div>
+//       </div>
+//     </section>
+//   )
+// }
+
+// interface SocialIconProps {
+//   href: string
+//   icon: React.ReactNode
+// }
+
+// const SocialIcon = ({ href, icon }: SocialIconProps) => {
+//   return (
+//     <motion.a
+//       href={href}
+//       target="_blank"
+//       rel="noopener noreferrer"
+//       whileHover={{ scale: 1.2, rotate: 5 }}
+//       whileTap={{ scale: 0.9 }}
+//       className="bg-white/10 p-3 rounded-full shadow-md text-white hover:text-blue-400 hover:bg-white/20 transition"
+//     >
+//       {icon}
+//     </motion.a>
+//   )
+// }
+
 // export default Hero
+
 "use client"
 
 import type React from "react"
-
+import img from "../assets/Jay2.jpg"
 import { useState, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion } from "framer-motion"
 import Image from "next/image"
-import { Menu, X } from "lucide-react"
 import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa"
 
-// Custom Typing Animation Component
+// ---- Typed Text Component ----
 interface TypedTextProps {
-  strings: string[];
-  typeSpeed?: number;
-  backSpeed?: number;
-  loop?: boolean;
+  strings: string[]
+  typeSpeed?: number
+  backSpeed?: number
+  loop?: boolean
 }
-
-const TypedText = ({ strings, typeSpeed = 30, backSpeed = 30}: TypedTextProps) => {
+const TypedText = ({ strings, typeSpeed = 30, backSpeed = 30 }: TypedTextProps) => {
   const [currentStringIndex, setCurrentStringIndex] = useState(0)
   const [currentText, setCurrentText] = useState("")
   const [isDeleting, setIsDeleting] = useState(false)
 
   useEffect(() => {
     const currentString = strings[currentStringIndex]
-
-    const timeout = setTimeout(
-      () => {
-        if (!isDeleting) {
-          // Typing
-          if (currentText.length < currentString.length) {
-            setCurrentText(currentString.slice(0, currentText.length + 1))
-          } else {
-            // Finished typing, start deleting after a pause
-            setTimeout(() => setIsDeleting(true), 1000)
-          }
+    const timeout = setTimeout(() => {
+      if (!isDeleting) {
+        if (currentText.length < currentString.length) {
+          setCurrentText(currentString.slice(0, currentText.length + 1))
         } else {
-          // Deleting
-          if (currentText.length > 0) {
-            setCurrentText(currentText.slice(0, -1))
-          } else {
-            // Finished deleting, move to next string
-            setIsDeleting(false)
-            setCurrentStringIndex((prev) => (prev + 1) % strings.length)
-          }
+          setTimeout(() => setIsDeleting(true), 1000)
         }
-      },
-      isDeleting ? backSpeed : typeSpeed,
-    )
+      } else {
+        if (currentText.length > 0) {
+          setCurrentText(currentText.slice(0, -1))
+        } else {
+          setIsDeleting(false)
+          setCurrentStringIndex((prev) => (prev + 1) % strings.length)
+        }
+      }
+    }, isDeleting ? backSpeed : typeSpeed)
 
     return () => clearTimeout(timeout)
   }, [currentText, isDeleting, currentStringIndex, strings, typeSpeed, backSpeed])
@@ -211,93 +426,72 @@ const TypedText = ({ strings, typeSpeed = 30, backSpeed = 30}: TypedTextProps) =
   )
 }
 
+// ---- Social Icon ----
+interface SocialIconProps {
+  href: string
+  icon: React.ReactNode
+}
+const SocialIcon = ({ href, icon }: SocialIconProps) => (
+  <motion.a
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    whileHover={{ scale: 1.15 }}
+    whileTap={{ scale: 0.9 }}
+    className="bg-white p-3 rounded-full shadow hover:shadow-md transition text-gray-700 hover:text-blue-500"
+  >
+    {icon}
+  </motion.a>
+)
+
 const Hero = () => {
   const [isClient, setIsClient] = useState(false)
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
+  useEffect(() => setIsClient(true), [])
 
   return (
-    <section
-      id="home"
-      className="relative min-h-screen flex flex-col justify-between bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#0f172a] text-white overflow-hidden"
-    >
-      {/* Animated Gradient Blobs */}
-      <motion.div
-        animate={{ x: [0, 50, -50, 0], y: [0, -30, 30, 0] }}
-        transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY }}
-        className="absolute top-10 left-10 w-72 h-72 bg-purple-500 rounded-full blur-3xl opacity-30"
-      />
-      <motion.div
-        animate={{ x: [0, -40, 40, 0], y: [0, 40, -40, 0] }}
-        transition={{ duration: 25, repeat: Number.POSITIVE_INFINITY }}
-        className="absolute bottom-10 right-10 w-80 h-80 bg-blue-500 rounded-full blur-3xl opacity-30"
-      />
-
-      {/* Navbar */}
-      <nav className="fixed top-0 left-0 w-full bg-white/10 backdrop-blur-lg shadow-lg z-50 py-4">
-        <div className="container mx-auto flex justify-between items-center px-6 lg:px-16">
-          <h1 className="text-2xl font-bold tracking-widest text-white">DJ</h1>
-          <ul className="hidden md:flex gap-8 text-gray-200 font-medium">
+    <section className="relative min-h-screen bg-gray-50 text-gray-800 overflow-hidden">
+      {/* ---- Floating Sticky Navbar ---- */}
+      <div className="sticky top-6 z-50 flex justify-center">
+        <div className="bg-white/60 backdrop-blur-md rounded-full shadow-lg px-10 py-3">
+          <ul className="flex gap-8 font-medium text-gray-700">
             {["Home", "Education", "Projects", "Skills", "Contact"].map((item) => (
               <li key={item}>
-                <a href={`#${item.toLowerCase()}`} className="hover:text-blue-400 transition">
+                <a href={`#${item.toLowerCase()}`} className="hover:text-blue-500 transition">
                   {item}
                 </a>
               </li>
             ))}
           </ul>
-          <button className="md:hidden text-white" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
         </div>
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {isMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              className="absolute top-16 left-0 w-full bg-white/20 backdrop-blur-lg shadow-lg md:hidden"
-            >
-              <ul className="flex flex-col items-center gap-4 py-4 text-white">
-                {["Home", "Education", "Projects", "Skills", "Contact"].map((item) => (
-                  <li key={item}>
-                    <a
-                      href={`#${item.toLowerCase()}`}
-                      onClick={() => setIsMenuOpen(false)}
-                      className="hover:text-blue-400 transition"
-                    >
-                      {item}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </nav>
+      </div>
 
-      {/* Main Content */}
-      <div className="container mx-auto flex flex-col-reverse lg:flex-row items-center justify-center gap-16 px-6 lg:px-16 pt-32 lg:pt-40">
+      {/* ---- Decorative Shapes ---- */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.15, x: [0, 50, -50, 0], y: [0, -30, 30, 0] }}
+        transition={{ duration: 20, repeat: Infinity }}
+        className="absolute top-20 left-20 w-72 h-72 bg-blue-300 rounded-full blur-3xl"
+      />
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.15, x: [0, -40, 40, 0], y: [0, 40, -40, 0] }}
+        transition={{ duration: 25, repeat: Infinity }}
+        className="absolute bottom-20 right-20 w-80 h-80 bg-purple-300 rounded-full blur-3xl"
+      />
+
+      {/* ---- Hero Content ---- */}
+      <div className="container mx-auto flex flex-col-reverse lg:flex-row items-center justify-between gap-16 px-6 lg:px-16 pt-20 lg:pt-32">
         {/* Left Content */}
         <motion.div
-          initial={{ opacity: 0, x: -100 }}
+          initial={{ opacity: 0, x: -80 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1 }}
           className="flex-1 text-center lg:text-left"
         >
-          <motion.h1
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="text-5xl lg:text-7xl font-extrabold mb-4 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent"
-          >
+          <h1 className="text-5xl lg:text-7xl font-extrabold mb-4 text-gray-900">
             DEVUPALLI JAYANTH
-          </motion.h1>
-          <h2 className="text-2xl lg:text-3xl text-gray-300 mb-4 h-12">
+          </h1>
+          <h2 className="text-2xl lg:text-3xl text-gray-500 mb-4 h-12">
             {isClient && (
               <TypedText
                 strings={["WEB DEVELOPER", "UI/UX DESIGN ENTHUSIAST", "PROBLEM SOLVER"]}
@@ -307,8 +501,8 @@ const Hero = () => {
               />
             )}
           </h2>
-          <p className="text-lg text-gray-400 mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed">
-            I create beautiful, responsive, and high-performance web applications using cutting-edge technology.
+          <p className="text-lg text-gray-600 mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed">
+            I build clean, responsive, and high-performance web applications with a passion for modern design and smooth user experiences.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
             {isClient && (
@@ -317,7 +511,7 @@ const Hero = () => {
                 download="Resume.pdf"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition"
+                className="bg-blue-500 text-white px-8 py-3 rounded-full shadow hover:shadow-md transition"
               >
                 Download Resume
               </motion.a>
@@ -332,44 +526,24 @@ const Hero = () => {
 
         {/* Right Image */}
         <motion.div
-          initial={{ opacity: 0, x: 100 }}
+          initial={{ opacity: 0, x: 80 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1 }}
           className="flex-1 flex justify-center lg:justify-end relative"
         >
-          <div className="relative group">
-            <div className="absolute -inset-6 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 blur-3xl opacity-60 group-hover:opacity-80 transition" />
+          <div className="relative">
+            <div className="absolute -inset-6 bg-gradient-to-tr from-blue-200 to-purple-200 rounded-full blur-3xl opacity-60" />
             <Image
-              src="/placeholder.svg?height=340&width=340"
+              src={img || "/placeholder.svg"}
               alt="Devupalli Jayanth"
               width={340}
               height={340}
-              className="rounded-full shadow-2xl border-4 border-white/20"
+              className="rounded-full shadow-2xl border-4 border-white"
             />
           </div>
         </motion.div>
       </div>
     </section>
-  )
-}
-
-interface SocialIconProps {
-  href: string
-  icon: React.ReactNode
-}
-
-const SocialIcon = ({ href, icon }: SocialIconProps) => {
-  return (
-    <motion.a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      whileHover={{ scale: 1.2, rotate: 5 }}
-      whileTap={{ scale: 0.9 }}
-      className="bg-white/10 p-3 rounded-full shadow-md text-white hover:text-blue-400 hover:bg-white/20 transition"
-    >
-      {icon}
-    </motion.a>
   )
 }
 
